@@ -3,12 +3,54 @@ body{
     margin-left:0;
     margin-right:0;
     margin-bottom:0;
+    background-color: #e8e6e1;
 }
 
 header{
-    background-color: #d3d3d3;
     display: flex;
     justify-content: center;
-    font-size: 7vh;
-    font-family: "Verdana";
+    font-size: 10vh;
+    font-family: "Courier New";
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
+
+.app{
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    align-self: stretch;
+    align-items: center;
+}
+
+
+.landing{
+    position: absolute;
+    left: 35%;
+    z-index: 1;
+}
+
+#landing-box{
+    /*opacity: 0.5;*/
+    position: absolute;
+    z-index: 1;
+    
+    
+}
+
+#landing-form{
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    top: 10px;
+}
+
+input{
+    width: 6vw;
+}
+
+form label{
+    color: "grey";
+    font-family: "Arial";
+}
+
