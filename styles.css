@@ -18,7 +18,7 @@ header{
 .app{
     display: flex;
     flex-direction: column;
-    border-style: solid;
+
     align-self: stretch;
     align-items: center;
 }
@@ -32,8 +32,8 @@ header{
 .landing{
     position: absolute;
     z-index: 1;
-    display: flex; 
-    border-style: solid;
+    display: none; 
+
     width: 100%;
     height: 100%;
     justify-content: center;
