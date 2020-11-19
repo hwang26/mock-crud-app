@@ -25,6 +25,8 @@ const landingPageData = window.localStorage;
 
 const selectLanding = document.querySelector(".landing");
 
+const userInfo = document.querySelector(".user-info");
+
 let fieldCheck = new Array(inputArray.length);
 
 for(let i=0; i<fieldCheck.length; i++){
@@ -133,9 +135,45 @@ function submitButtonClick(e){
         }
 
         landingPageData.setItem("formShow", "none");
+        landingPageData.setItem("currentExpenseTotal", "0");
 
         // Make the landing box disappear
         selectLanding.style.display = "none";     
     }
 
+}
+
+// Set user info
+if(formShow == "none"){
+    let values = document.querySelectorAll(".user-info p");
+
+    values[0].innerText += " " + landingPageData.getItem("First Name") + " " + landingPageData.getItem("Last Name");
+    values[1].innerText += " " + landingPageData.getItem("Age");
+    values[2].innerText += " " + landingPageData.getItem("Salary Before Taxes");
+    values[3].innerText += " " + landingPageData.getItem("Monthly Pay After Taxes");
+    values[4].innerText += " " + landingPageData.getItem("Monthly Savings Goal");
+ 
+    let budgetLimit = Number(landingPageData.getItem("Monthly Pay After Taxes")) - Number(landingPageData.getItem("Monthly Savings Goal"));
+
+    let progressBar = document.querySelector(".progress-bar");
+
+    // TODO 
+    // Is not dynamic, we need to have it be async probably...
+    progressBar.innerText = landingPageData.getItem("currentExpenseTotal") + "/" + budgetLimit.toString();
+
+}
+
+const currentExpense = document.querySelector(".current-expense");
+currentExpense.addEventListener("submit", addExpense);
+
+function addExpense(e){
+    e.preventDefault();
+
+    let newExpense =  Number(e.currentTarget.getElementsByTagName("INPUT")[0].value);
+
+    newExpense += Number(landingPageData.getItem("currentExpenseTotal"));
+
+    landingPageData.setItem("currentExpenseTotal",newExpense);
+
+    e.currentTarget.getElementsByTagName("INPUT")[0].value = "";
 }

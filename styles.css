@@ -3,7 +3,7 @@ body{
     margin-left:0;
     margin-right:0;
     margin-bottom:0;
-    background-color: #e8e6e1;
+    background-color: #ffffff;
 }
 
 header{
@@ -89,3 +89,15 @@ form span label{
     width: 20%;
 }
 
+.user-info p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.user-info:nth-child(1){
+    margin-top: 1vh;
+}
+
+.user-info:nth-child(n){
+    margin-bottom: 1vh;
+}
