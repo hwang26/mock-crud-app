@@ -6,12 +6,13 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var initRouter = require('./routes/init.js');
+let dashRouter = require('./routes/dash');
 
 var app = express();
 
 //Set up mongoose connection
-var mongoDB = 'mongodb+srv://username:<password>@cluster0.dsqmg.mongodb.net/<dbname>?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://<username>:<password>@cluster0.dsqmg.mongodb.net/<collection-name>?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -27,7 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/init', initRouter);
+app.use('/dashboard', dashRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

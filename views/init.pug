@@ -1,0 +1,42 @@
+extends layout
+
+block content
+
+    div(class="container-fluid")
+
+        //TEST
+        if errors
+            ul
+                for error in errors
+                    li= error.msg
+
+        h1(class="display-4") Initialize User
+
+        form(method="POST" action="")
+            div(class="row mb-3")
+                div.col-2
+                    if firstName
+                        input(id="firstName" name="firstName" class="form-control" type="text" placeholder="First Name" value=firstName)
+                    else
+                        input(id="firstName" name="firstName" class="form-control" type="text" placeholder="First Name")
+            div(class="row mb-3")
+                div.col-2  
+                    if lastName
+                        input(id="lastName" name="lastName" class="form-control" type="text" placeholder="Last Name" value=lastName)
+                    else
+                        input(id="lastName" name="lastName" class="form-control" type="text" placeholder="Last Name")             
+            div(class="row mb-3")
+                div.col-2
+                    if takeHome
+                        input(id="takeHome" name="takeHome" class="form-control" type="text" placeholder="Net Biweekly Takehome" value=takeHome)
+                    else
+                        input(id="takeHome" name="takeHome" class="form-control" type="text" placeholder="Net Biweekly Takehome")                    
+            div(class="row mb-3")
+                div.col-3
+                    if financialGoal
+                        textarea(id="financialGoal" name="financialGoal" class="form-control" placeholder="Financial Goal, 250 chars max" maxlength="250" wrap="hard")= financialGoal
+                    else
+                        textarea(id="financialGoal" name="financialGoal" class="form-control" placeholder="Financial Goal, 250 chars max" maxlength="250" wrap="hard")
+            div(class="row")
+                div.col-2
+                    button(type="submit" class="btn btn-primary") Submit
