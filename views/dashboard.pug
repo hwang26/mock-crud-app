@@ -2,4 +2,77 @@ extends layout
 
 block content
 
-    h1 Dashboard
+    div.row
+        // User Info + Budgets
+
+        // Make it a card where the header is user info and the body is budgets
+        div.col
+
+            div.card
+
+                // COMPONENT: User Info
+                div.card-header
+
+                    div.row
+
+                        // Percent Spent
+                        div(class="col-8 progressBar")
+
+                            p(class="h3") Amount Spent
+
+                            div.progress
+                                div(class="progress-bar w-75 bg-success" role="progressbar") 75%
+
+                        // User Info
+                        div(class="col-4 readOnlyUserInfo")
+
+                            span    
+                                span
+
+                                    span(class="readOnlyUserInfoField")= userFirstName
+                                br
+                                span(class="readOnlyUserInfoField")= userLastName
+                                br
+                                span(class="readOnlyUserInfoField")= userMonthlyWage
+                                br
+                                span(class="readOnlyUserInfoField")= userGoal
+
+                            button(class="btn btn-secondary editButton" type="button") Edit
+
+                        // User Info (Editable)
+                        div(class="col-4 editableUserInfo")
+
+                            div(class="row")
+
+                                div.col
+
+                                    input(type="text" name="firstName" value= userFirstName)
+                                    input(type="text" name="lastName" value= userLastName)
+                                    input(type="text" name="takeHome" value= userMonthlyWage)
+                                    input(type="text" name="financialGoal" value= userGoal)
+
+                                div.col
+
+                                    button(class="btn btn-primary saveButton" type="button") Save
+                                    button(class="btn btn-secondary cancelButton" type="button") Cancel
+
+                    
+                // COMPONENT: Budgets
+                ul(class="list-group list-group-flush")
+
+                    // For all our active budgets, we'll list them here
+                    if budgets
+                        each budget in budgets
+                            li.list-group-item= budget.name
+                
+                button(class="btn btn-primary" type="button") Add Budget
+
+        // COMPONENT: Uninspected Transactions            
+        div.col
+            div.row
+                div.col
+                    div.card-header
+
+                        | Uninspected Transactions
+
+    script(src="/javascripts/dashboardEventListeners.js" type="module")                    

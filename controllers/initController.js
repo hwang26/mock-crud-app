@@ -14,7 +14,6 @@ exports.getInitPage = function(req,res){
 
 exports.postWriteUser = [
 
-
     /*
         Validate & Sanitize fields
 
@@ -25,7 +24,7 @@ exports.postWriteUser = [
 
     body('firstName', 'First Name must not be empty').trim().not().isEmpty().escape(),
     body('lastName', 'Last Name must not be empty').trim().not().isEmpty().escape(),
-    body('takeHome').isCurrency({allow_negatives: false}).withMessage('Takehome must be a valid currency amount'),
+    body('takeHome').isCurrency({allow_negatives: false}).withMessage('Take home must be a valid currency amount'),
     body('financialGoal', 'Financial Goal must not be empty').trim().not().isEmpty().escape(),
 
     /*
@@ -48,7 +47,7 @@ exports.postWriteUser = [
         });
 
         if(errs.isEmpty()){
-            // Save user to MongoDB
+
             user.save((err)=>{
                 if(err){
                     return next(err);

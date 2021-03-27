@@ -1,8 +1,27 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+.progressBar .progress{
+  /*  height: 100%; */
 }
 
-a {
-  color: #00B7FF;
+/*Progress Bar Title*/
+.progressBar .h3{
+    text-align: center;
+}
+
+.progress{
+    background-color: lightgrey;
+}
+
+.editableUserInfo{
+    display: none; 
+}
+
+.readOnlyUserInfo{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*Space between User Info and button*/
+.readOnlyUserInfo span{
+    padding-right: 1%;
 }

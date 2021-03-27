@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var initRouter = require('./routes/init.js');
+var initRouter = require('./routes/init');
 let dashRouter = require('./routes/dash');
 
 var app = express();

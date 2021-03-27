@@ -10,4 +10,46 @@ html(lang='en')
         link(rel='stylesheet', href='/stylesheets/style.css')
 
     body
+        if includeNavbar
+            nav(class="navbar navbar-expand-lg bg-dark navbar-dark")
+                
+                // Brand logo
+                
+                //span(class="navbar-brand") Budget App
+
+                // Hamburger menu button
+                // The data-target is the id of the container of the actual navbar links
+
+                button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+                    span(class="navbar-toggler-icon")
+
+                // Navbar links
+                div(class="collapse navbar-collapse" id="navbarSupportedContent")
+
+                    ul(class="navbar-nav mr-auto")
+                        
+                        // Add in "active" class as a parameter based on which view we're currently on
+
+                        li(class=(active==="Home" ? 'nav-item active' : 'nav-item'))
+                            a(class="nav-link" href="/dashboard") Home
+
+                            // Add in screenreader functionality
+                            // <span class="sr-only">(current)</span>
+
+                        li(class=(active==="Upload Transactions" ? 'nav-item active' : 'nav-item'))
+                            a(class="nav-link" href="/dashboard/test") Upload Transactions
+
+                        li(class=(active==="Add Transactions" ? 'nav-item active' : 'nav-item'))
+                            a(class="nav-link" href="/dashboard/test") Add Transactions
+
+                        li(class=(active==="Spending Breakdown" ? 'nav-item active' : 'nav-item'))
+                            a(class="nav-link" href="/dashboard/test") Spending Breakdown
+
+                    // User information
+
+                    ul(class="navbar-nav")
+
+                        li(class=(active==="About" ? 'nav-item active' : 'nav-item'))
+                            a(class="nav-link" href="/dashboard/test") About
+
         block content

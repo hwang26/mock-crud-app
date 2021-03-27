@@ -7,3 +7,9 @@ This includes:
 - Node.js and npm
 - Express.js for directory structure, routing, etc.
 - NoSQL MongoDB and Mongoose ORM
+
+Prerequisites:
+- Chase Account/Credit-card CSV files
+- Set up MongoDB (MongoDB Atlast)
+- Update DB connection string in `app.js`
+- Node.JS, Express.JS, npm
