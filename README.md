@@ -10,6 +10,6 @@ This includes:
 
 Prerequisites:
 - Chase Account/Credit-card CSV files
-- Set up MongoDB (MongoDB Atlast)
+- Set up MongoDB (MongoDB Atlas)
 - Update DB connection string in `app.js`
 - Node.JS, Express.JS, npm

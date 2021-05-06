@@ -3,60 +3,12 @@ extends layout
 block content
 
     div.row
-        // User Info + Budgets
 
-        // Make it a card where the header is user info and the body is budgets
         div.col
 
             div.card
 
-                // COMPONENT: User Info
-                div.card-header
-
-                    div.row
-
-                        // Percent Spent
-                        div(class="col-8 progressBar")
-
-                            p(class="h3") Amount Spent
-
-                            div.progress
-                                div(class="progress-bar w-75 bg-success" role="progressbar") 75%
-
-                        // User Info
-                        div(class="col-4 readOnlyUserInfo")
-
-                            span    
-                                span
-
-                                    span(class="readOnlyUserInfoField")= userFirstName
-                                br
-                                span(class="readOnlyUserInfoField")= userLastName
-                                br
-                                span(class="readOnlyUserInfoField")= userMonthlyWage
-                                br
-                                span(class="readOnlyUserInfoField")= userGoal
-
-                            button(class="btn btn-secondary editButton" type="button") Edit
-
-                        // User Info (Editable)
-                        div(class="col-4 editableUserInfo")
-
-                            div(class="row")
-
-                                div.col
-
-                                    input(type="text" name="firstName" value= userFirstName)
-                                    input(type="text" name="lastName" value= userLastName)
-                                    input(type="text" name="takeHome" value= userMonthlyWage)
-                                    input(type="text" name="financialGoal" value= userGoal)
-
-                                div.col
-
-                                    button(class="btn btn-primary saveButton" type="button") Save
-                                    button(class="btn btn-secondary cancelButton" type="button") Cancel
-
-                    
+                // TODO
                 // COMPONENT: Budgets
                 ul(class="list-group list-group-flush")
 
@@ -65,14 +17,80 @@ block content
                         each budget in budgets
                             li.list-group-item= budget.name
                 
-                button(class="btn btn-primary" type="button") Add Budget
+                button(class="btn btn-primary" type="button" data-toggle="modal" data-target="#addBudgetModal") Add Budget
+
+                // ADD BUDGET MODAL
+                // Tab-index of -1 prevents sequential tab behavior on the element
+                // The dialog aria role gives this Div some semantic meaning
+
+                div(id="addBudgetModal" class="modal fade" tabindex="-1" role="dialog")
+                    div(class="modal-dialog" role="document")
+                        div.modal-content
+
+                            // Header
+
+                            div.modal-header
+
+                                h5.modal-title Add Budget
+
+                                button(type="button" class="close" data-dismiss="modal" aria-label="Close") 
+                                
+                                    // Purely decorative, not useful for accessibility software
+                                    span(aria-hidden="true") &times;
+
+                            // Body
+
+                            div.modal-body
+
+                                form
+
+                                    div.form-group
+
+                                        label(for="addBudgetNameInput") Name
+                                        input(id="addBudgetNameInput" type="text" class="form-control" placeholder="Enter Budget Name")
+
+                                    div.form-group
+
+                                        label(for="addBudgetAmount") Amount Per Month
+                                        input(id="addBudgetAmount" type="number" class="form-control" placeholder="Enter Budget Amount")
+
+                                    div.form-group
+
+                                        label(for="addBudgetCategories") Categories
+                                        select(id="addBudgetCategories" class="form-control" multiple)
+
+                                            option Food
+                                            option Groceries
+                                            option Tech
+
+                                        div.row
+                                            div(class="col pr-0")
+                                                input(type="text" class="form-control" placeholder="Add Category")
+                                            div(class="col pl-0")
+                                                button(type="button" class="btn btn-primary") Save
+                                        
+                                        
+
+                            // Footer
+
+                            div.modal-footer
+                                button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+                                button(type="button" class="btn btn-primary") Save Budget
+                                
 
         // COMPONENT: Uninspected Transactions            
         div.col
             div.row
                 div.col
-                    div.card-header
+                    div.card
+                        div.card-header
 
-                        | Uninspected Transactions
+                            | Uninspected Transactions
+                        ul(class="list-group list-group-flush")
+
+                            if uninspectedTransactions
+                                each transaction in uninspectedTransactions
+                                    li.list-group-item= transaction
+
 
     script(src="/javascripts/dashboardEventListeners.js" type="module")                    

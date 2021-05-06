@@ -7,16 +7,12 @@ let BudgetSchema = new Schema({
         type: Date,
         required: true
     },
-    dateEnds:{
-        type: Date,
-        required: true
-    },
     name: {
         type: String,
         required: true
     },
-    category: {
-        type: Schema.Types.ObjectId, 
+    categories: {
+        type: [Schema.Types.ObjectId], 
         ref: 'Category',
         required: true
     },
