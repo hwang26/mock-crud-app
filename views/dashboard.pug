@@ -4,12 +4,12 @@ block content
 
     div.row
 
+        // COLUMN 1
         div.col
 
             div.card
 
-                // TODO
-                // COMPONENT: Budgets
+                // List of budgets
                 ul(class="list-group list-group-flush")
 
                     // For all our active budgets, we'll list them here
@@ -17,18 +17,17 @@ block content
                         each budget in budgets
                             li.list-group-item= budget.name
                 
+                // Add Budget Button
                 button(class="btn btn-primary" type="button" data-toggle="modal" data-target="#addBudgetModal") Add Budget
 
-                // ADD BUDGET MODAL
+                // Add Budget Modal
                 // Tab-index of -1 prevents sequential tab behavior on the element
                 // The dialog aria role gives this Div some semantic meaning
-
                 div(id="addBudgetModal" class="modal fade" tabindex="-1" role="dialog")
                     div(class="modal-dialog" role="document")
                         div.modal-content
 
                             // Header
-
                             div.modal-header
 
                                 h5.modal-title Add Budget
@@ -36,10 +35,10 @@ block content
                                 button(type="button" class="close" data-dismiss="modal" aria-label="Close") 
                                 
                                     // Purely decorative, not useful for accessibility software
+                                    // "X" symbol for the close button
                                     span(aria-hidden="true") &times;
 
                             // Body
-
                             div.modal-body
 
                                 form
@@ -59,25 +58,23 @@ block content
                                         label(for="addBudgetCategories") Categories
                                         select(id="addBudgetCategories" class="form-control" multiple)
 
-                                            option Food
-                                            option Groceries
-                                            option Tech
+                                            each category in categories
+
+                                                option= category.name
 
                                         div.row
                                             div(class="col pr-0")
-                                                input(type="text" class="form-control" placeholder="Add Category")
+                                                input(type="text" class="form-control saveCategory" placeholder="Add Category")
                                             div(class="col pl-0")
-                                                button(type="button" class="btn btn-primary") Save
+                                                button(type="button" class="btn btn-primary saveCategory") Save
                                         
-                                        
-
                             // Footer
-
                             div.modal-footer
                                 button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
                                 button(type="button" class="btn btn-primary") Save Budget
                                 
 
+        // COLUMN 2
         // COMPONENT: Uninspected Transactions            
         div.col
             div.row

@@ -1,38 +1,27 @@
 const { body,validationResult } = require('express-validator');
 
-let User = require('../models/user');
 let Budget = require('../models/budget');
 let Transaction = require('../models/transaction');
+let Category = require('../models/category');
 
 exports.getDashPage = async (req,res,next) => {
 
     // Query results
-    let userData;
     let budgets;
     let uninspectedTransactions;
-
-    // User parameters
-    let userFullName;
-    let userMonthlyWage;
-    let userGoal;
+    let categories;
 
     try{
-        // Get user information
-        userData = await User.find({});
         // Get budget information
         budgets = await Budget.find({});
         // Get transaction information where inspected == false
         uninspectedTransactions = await Transaction.find({inspected: false}).exec();
+        // Get Categories
+        categories = await Category.find({});
     }
     catch(error){
         next(error);
     }
-
-    // Prepare user data parameters
-    userData = userData[0];
-    userFullName = userData.firstName + " " + userData.lastName;
-    userMonthlyWage = "$" + (userData.takeHome*2).toString() + "/month";
-    userGoal = userData.financialGoal;
 
     // If no budgets, set parameter to 0
     if(budgets.length == 0){
@@ -43,13 +32,38 @@ exports.getDashPage = async (req,res,next) => {
     {
         includeNavbar: 1, 
         active: "Home", 
-        userFullName: userFullName, 
-        userFirstName: userData.firstName, 
-        userLastName: userData.lastName, 
-        userMonthlyWage: userMonthlyWage, 
-        userGoal: userGoal, 
         budgets: budgets,
-        uninspectedTransactions: uninspectedTransactions
+        uninspectedTransactions: uninspectedTransactions,
+        categories: categories
     });
 
 };
+
+exports.postSaveCategory = async(req,res,next) => {
+    /*
+        Write the category to the DB and return a string indicating either success or failure.
+    */
+
+    try{
+        let categoryToBeSaved = new Category({
+            name: req.body.saveCategory
+        });
+
+        let saveResult = await categoryToBeSaved.save();
+
+        if(saveResult == categoryToBeSaved){
+            //Success
+            res.json(1);
+        }
+        else{
+            //Failure
+            res.json(0);
+        }
+    }
+    catch(error){
+        next(error);
+    }
+
+    // res.json("");
+
+}
