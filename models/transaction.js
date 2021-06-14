@@ -34,8 +34,8 @@ let TransactionSchema = new Schema({
         type: Date,
         required: true
     },
-    categories: {
-        type: [Schema.Types.ObjectId],
+    category: {
+        type: Schema.Types.ObjectId,
         ref: 'Category',
         required: false
     }

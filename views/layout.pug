@@ -5,13 +5,14 @@ html(lang='en')
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css")
         script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
         link(rel='stylesheet', href='/stylesheets/style.css')
 
     body
         if includeNavbar
-            nav(class="navbar navbar-expand-lg bg-dark navbar-dark")
+            nav(class="navbar navbar-expand-lg navbar-dark bg-primary")
                 
                 // Brand logo
                 
@@ -37,19 +38,23 @@ html(lang='en')
                             // <span class="sr-only">(current)</span>
 
                         li(class=(active==="Upload Transactions" ? 'nav-item active' : 'nav-item'))
-                            a(class="nav-link" href="/dashboard/test") Upload Transactions
+                            a(class="nav-link" href="/dashboard/test") 
+                                del Upload Transactions
 
                         li(class=(active==="Add Transactions" ? 'nav-item active' : 'nav-item'))
-                            a(class="nav-link" href="/dashboard/test") Add Transactions
+                            a(class="nav-link" href="/dashboard/test") 
+                                del Ad-Hoc Transactions
 
                         li(class=(active==="Spending Breakdown" ? 'nav-item active' : 'nav-item'))
-                            a(class="nav-link" href="/dashboard/test") Spending Breakdown
+                            a(class="nav-link" href="/dashboard/test") 
+                                del Spending Breakdown
 
                     // User information
 
                     ul(class="navbar-nav")
 
                         li(class=(active==="About" ? 'nav-item active' : 'nav-item'))
-                            a(class="nav-link" href="/dashboard/test") About
+                            a(class="nav-link" href="/dashboard/test") 
+                                del About
 
         block content

@@ -1,27 +1,12 @@
 
-.progressBar .progress{
-  /*  height: 100%; */
+/*
+Maintain same border color for button
+*/
+
+button.btn-dark{
+    border-color: #007bff;
 }
 
-/*Progress Bar Title*/
-.progressBar .h3{
-    text-align: center;
-}
-
-.progress{
-    background-color: lightgrey;
-}
-
-.editableUserInfo{
-    display: none; 
-}
-
-.readOnlyUserInfo{
-    display: flex;
-    justify-content: flex-end;
-}
-
-/*Space between User Info and button*/
-.readOnlyUserInfo span{
-    padding-right: 1%;
+button.btn-dark:hover{
+    border-color: #007bff;
 }

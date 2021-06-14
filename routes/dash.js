@@ -7,4 +7,6 @@ router.get('/', dashController.getDashPage);
 
 router.post('/saveCategory', dashController.postSaveCategory);
 
+router.post('/saveBudget', dashController.postNewBudget);
+
 module.exports = router;

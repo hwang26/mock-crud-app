@@ -8,6 +8,9 @@ block content
         div.col
 
             div.card
+                div.card-header
+
+                    | Budgets
 
                 // List of budgets
                 ul(class="list-group list-group-flush")
@@ -15,10 +18,55 @@ block content
                     // For all our active budgets, we'll list them here
                     if budgets
                         each budget in budgets
-                            li.list-group-item= budget.name
+
+                            // Each Budget is displayed with its name, percentage bar, edit button, and delete button
+
+                            - var name = budget[0].name;
+                            - var spent = budget[1];
+                            - var amount = budget[0].amount;
+                            li.list-group-item
+
+                                div.row
+
+                                    div.col-3
+
+                                        p #{name}
+
+                                    div.col-4
+
+                                        div.progress
+
+                                            div(class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100")
+
+                                                | #{Math.floor((spent/amount)*100)}%
+
+                                    div.col-3
+
+                                        p #{amount-spent} remaining
+
+                                    div.col-1
+
+                                        button(type="button" class="close" /*data-dismiss="modal" aria-label="Close"*/) 
+                                        
+                                            // Purely decorative, not useful for accessibility software
+                                            // "X" symbol for the close button
+                                            span(aria-hidden="true") 
+
+                                                i(class="bi-pencil-square")
+
+                                    div.col-1
+
+                                        
+                                        button(type="button" class="close" /*data-dismiss="modal" aria-label="Close"*/) 
+                                        
+                                            // Purely decorative, not useful for accessibility software
+                                            // "X" symbol for the close button
+                                            span(aria-hidden="true")
+
+                                                i(class="bi-x-lg")
                 
                 // Add Budget Button
-                button(class="btn btn-primary" type="button" data-toggle="modal" data-target="#addBudgetModal") Add Budget
+                button(class="btn btn-dark bg-primary" type="button" data-toggle="modal" data-target="#addBudgetModal") Add Budget
 
                 // Add Budget Modal
                 // Tab-index of -1 prevents sequential tab behavior on the element
@@ -55,8 +103,8 @@ block content
 
                                     div.form-group
 
-                                        label(for="addBudgetCategories") Categories
-                                        select(id="addBudgetCategories" class="form-control" multiple)
+                                        label(for="addBudgetCategories") Category
+                                        select(id="addBudgetCategories" class="form-control")
 
                                             each category in categories
 
@@ -77,17 +125,16 @@ block content
         // COLUMN 2
         // COMPONENT: Uninspected Transactions            
         div.col
-            div.row
-                div.col
-                    div.card
-                        div.card-header
 
-                            | Uninspected Transactions
-                        ul(class="list-group list-group-flush")
+            div.card
+                div.card-header
 
-                            if uninspectedTransactions
-                                each transaction in uninspectedTransactions
-                                    li.list-group-item= transaction
+                    | Uninspected Transactions
+                ul(class="list-group list-group-flush")
+
+                    if uninspectedTransactions
+                        each transaction in uninspectedTransactions
+                            li.list-group-item= transaction
 
 
     script(src="/javascripts/dashboardEventListeners.js" type="module")                    
