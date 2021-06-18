@@ -27,7 +27,7 @@ exports.getDashPage = async (req,res,next) => {
 
     try{
         // Get budget information
-        budgets = await Budget.find({});
+        budgets = await Budget.find({}).populate("category").exec();
         // Get transaction information where inspected == false
         uninspectedTransactions = await Transaction.find({inspected: false}).exec();
         // Get Categories
@@ -43,6 +43,7 @@ exports.getDashPage = async (req,res,next) => {
     }
     else{
         try{
+
             // For each budget, get the associated transactions (array) and append to the budgetData
             for(let i=0; i<budgets.length; i++){
                 let currentBudget = budgets[i];
@@ -54,17 +55,18 @@ exports.getDashPage = async (req,res,next) => {
                     transactionsSum = transactions[i].amount + transactionsSum;
                 }
 
+                // set the category name
+
+                currentBudget.categoryName = currentBudget.category.name;
+
                 budgetData.push([currentBudget,transactionsSum]);
-            } 
+            }
         }
         catch(e){
             console.log(e);
             next(e);
         }
     }
-
-    console.log("TEST");
-    console.log(budgetData);
 
     res.render('dashboard', 
     {
@@ -125,35 +127,56 @@ exports.postNewBudget = [
     body('category', 'Category must not be empty').trim().not().isEmpty().escape(),
     async (req,res,next) => {
 
-        console.log("INSIDE THE FUNCTION");
-        console.log(req.body);
-
         const errs = validationResult(req);
 
         console.log(errs);
 
         if(errs.isEmpty()){
+
+            // if id is null, then its a new budget, otherwise we should overwrite an old budget
+
             // Save new budget
             try{
 
-                let categoryId = await  Category.find({name:req.body.category}).exec();
+                let categoryId = await Category.find({name:req.body.category}).exec();
 
                 categoryId = categoryId[0]._id;
 
-                let newBudget = new Budget({
-                    name: req.body.name,
-                    amount: req.body.amount,
-                    category: categoryId,
-                    dateCreated: Date.now()
-                });
-
-                let budgetSaveResult = await newBudget.save();
-
-                if(budgetSaveResult == newBudget){
-                    res.json(1);
+                if(req.body.id == ""){
+                    let newBudget = new Budget({
+                        name: req.body.name,
+                        amount: req.body.amount,
+                        category: categoryId,
+                        dateCreated: Date.now()
+                    });
+    
+                    let budgetSaveResult = await newBudget.save();
+    
+                    if(budgetSaveResult == newBudget){
+                        res.json(1);
+                    }
+                    else{
+                        res.json(0);
+                    } 
                 }
                 else{
-                    res.json(0);
+                    
+                    let updateRes = await Budget.updateOne(
+                        {_id: req.body.id},
+                        {
+                            name: req.body.name,
+                            amount: req.body.amount,
+                            category: categoryId
+                        }
+                    );
+    
+                    // If we found a document to update, then it was a success
+                    if(updateRes.n == 1){
+                        res.json(1);
+                    }
+                    else{
+                        res.json(0);
+                    }
                 }
             }
             catch(e){
@@ -168,4 +191,27 @@ exports.postNewBudget = [
         
     }
 ];
+
+exports.deleteBudget = async(req,res,next) => {
+    let bId = req.body.id;
+
+    try{
+        let deletionResult = await Budget.deleteOne({_id: bId});
+
+        if(deletionResult.deletedCount == 1){
+            
+            // Success
+            
+            res.json(1);
+        }
+        else{
+            res.json(0);
+        }
+
+        
+    }
+    catch(e){
+        next(e);
+    }
+};
 

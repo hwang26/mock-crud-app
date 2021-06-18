@@ -9,4 +9,6 @@ router.post('/saveCategory', dashController.postSaveCategory);
 
 router.post('/saveBudget', dashController.postNewBudget);
 
+router.post('/deleteBudget', dashController.deleteBudget);
+
 module.exports = router;

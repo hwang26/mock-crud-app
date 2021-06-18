@@ -13,7 +13,6 @@ var app = express();
 
 //Set up mongoose connection
 //var mongoDB = 'mongodb+srv://<username>:<password>@cluster0.dsqmg.mongodb.net/<collection-name>?retryWrites=true&w=majority';
-
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

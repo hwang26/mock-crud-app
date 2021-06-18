@@ -17,13 +17,15 @@ block content
 
                     // For all our active budgets, we'll list them here
                     if budgets
-                        each budget in budgets
+                        each budget, index in budgets
 
                             // Each Budget is displayed with its name, percentage bar, edit button, and delete button
 
+                            - var bId = budget[0]._id;
                             - var name = budget[0].name;
                             - var spent = budget[1];
                             - var amount = budget[0].amount;
+                            - var categoryName = budget[0].categoryName;
                             li.list-group-item
 
                                 div.row
@@ -36,9 +38,11 @@ block content
 
                                         div.progress
 
-                                            div(class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100")
+                                            - var percent = Math.floor((spent/amount)*100);
 
-                                                | #{Math.floor((spent/amount)*100)}%
+                                            div(class="progress-bar bg-success" role="progressbar" style=`width:${percent}%` aria-valuenow=`${percent}` aria-valuemin="0" aria-valuemax="100")
+
+                                                | #{percent}%
 
                                     div.col-3
 
@@ -46,32 +50,45 @@ block content
 
                                     div.col-1
 
-                                        button(type="button" class="close" /*data-dismiss="modal" aria-label="Close"*/) 
-                                        
+                                        button(type="button" id="budgetEditButton" class="btn btn-secondary" data-toggle="modal" data-target="#addBudgetModal") 
+
+                                            span(aria-hidden="true" style="display:none;")
+
+                                                // Information to fill out form
+
+                                                p= bId
+                                                p= name
+                                                p= amount
+                                                p= categoryName
+
                                             // Purely decorative, not useful for accessibility software
                                             // "X" symbol for the close button
                                             span(aria-hidden="true") 
 
-                                                i(class="bi-pencil-square")
+                                                i(class="bi-pencil-square")   
 
                                     div.col-1
 
-                                        
-                                        button(type="button" class="close" /*data-dismiss="modal" aria-label="Close"*/) 
-                                        
+                                        button(type="button" id="budgetDeleteButton" class="btn btn-danger") 
+
+                                            span(aria-hidden="true" style="display:none;")
+
+                                                // Id for deletion
+                                                p= bId
+
                                             // Purely decorative, not useful for accessibility software
                                             // "X" symbol for the close button
                                             span(aria-hidden="true")
 
                                                 i(class="bi-x-lg")
-                
+
                 // Add Budget Button
                 button(class="btn btn-dark bg-primary" type="button" data-toggle="modal" data-target="#addBudgetModal") Add Budget
 
                 // Add Budget Modal
                 // Tab-index of -1 prevents sequential tab behavior on the element
                 // The dialog aria role gives this Div some semantic meaning
-                div(id="addBudgetModal" class="modal fade" tabindex="-1" role="dialog")
+                div(id="addBudgetModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static")
                     div(class="modal-dialog" role="document")
                         div.modal-content
 
@@ -80,8 +97,8 @@ block content
 
                                 h5.modal-title Add Budget
 
-                                button(type="button" class="close" data-dismiss="modal" aria-label="Close") 
-                                
+                                button(type="button" class="close x-button" data-dismiss="modal" aria-label="Close") 
+
                                     // Purely decorative, not useful for accessibility software
                                     // "X" symbol for the close button
                                     span(aria-hidden="true") &times;
@@ -115,12 +132,12 @@ block content
                                                 input(type="text" class="form-control saveCategory" placeholder="Add Category")
                                             div(class="col pl-0")
                                                 button(type="button" class="btn btn-primary saveCategory") Save
-                                        
+
                             // Footer
                             div.modal-footer
                                 button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
                                 button(type="button" class="btn btn-primary") Save Budget
-                                
+
 
         // COLUMN 2
         // COMPONENT: Uninspected Transactions            
