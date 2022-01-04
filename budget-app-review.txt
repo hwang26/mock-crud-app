@@ -1,0 +1,73 @@
+
+---
+
+Mock CRUD App
+
+--- Tech
+
+- Express
+
+	- Express Generator
+
+	- Handling Middleware
+	- Routing
+	- Directory structure
+
+	- Req,Res,Next pattern
+	- Error Handling
+
+- HTML meta tags, semantic tagging 
+
+- CSS flexbox, grid, media queries
+
+- JS DOM interfaces, basic syntax
+
+- Node JS/NPM
+	- Backend JS, module system, package manager 
+- Pug template engine
+- Controller files/functions to render views
+- Mongoose ORM for MongoDB. Model files.
+
+- Client/Serverside validation middleware
+
+--- Project Management
+
+- Github repo Projects
+
+- Backlog, In-Progress, Done
+
+- Tech Analysis, Tech Debt, Stories
+
+- Acceptance Criteria
+
+- Dependent tickets
+
+--- Clean Up
+
+[] Rename project
+
+--- Personal Thoughts
+
+Before starting this project, I had spent a few weeks learning basic web technologies such as HTML, CSS, JS, Express, Mongoose, Pug, etc. following a tutorial from MDN that focused on express.
+
+From that, I had confidence I could build a CRUD app similar to the Appian cross-platform apps that I was working on at my day job.
+
+I decided to focus on a simple problem which was tracking my budget and utilize a basic frontend library (Bootstrap).
+
+Project management was largely a success though actual development was messy. I was learning and developing at the same time and therefore ran into issues with modularity and making the code easy to read/reusable.
+
+Additionally, I had started experiencing burnout from working on the project after hours. I had also realized that because I couldn't access OFX (Open Financial Exchange) and didn't have the know-how to troubleshoot that, I was limited to manual input of transaction data.
+
+All in all, it seemed to me that the project was outliving its usefulness. Since I had already experienced what developing with this tech stack would feel like and the app's actual utility to me seemed limited.
+
+What I wish I had touched on more would be the actual modularity and unit testing aspects of the project. Going forward, these aspects could make managing the code for a project much easier.
+
+--- Do it again?
+
+I don't think I'd develop a CRUD app like this again. While it was cool to learn the tech, the usecase already seemed limited from the start.
+
+Without the motivation to create something interesting, I faltered quite a bit on this project and ultimately I left it unfinished.
+
+For my next project, I think an important thing to consider is the creativity involved in making something actually interesting and not a clone of a project that I may do at my day job.
+
+---
