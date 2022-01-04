@@ -42,10 +42,6 @@ Mock CRUD App
 
 - Dependent tickets
 
---- Clean Up
-
-[] Rename project
-
 --- Personal Thoughts
 
 Before starting this project, I had spent a few weeks learning basic web technologies such as HTML, CSS, JS, Express, Mongoose, Pug, etc. following a tutorial from MDN that focused on express.
